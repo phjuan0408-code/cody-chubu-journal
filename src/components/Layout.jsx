@@ -1,15 +1,4 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "./Navbar.jsx";
-import SiteFooter from "./SiteFooter.jsx";
-
-export default function Layout() {
-  return (
-    <div className="min-h-screen bg-travel-paper text-travel-ink">
-      <Navbar />
-      <main className="min-h-screen">
-        <Outlet />
-      </main>
-      <SiteFooter />
-    </div>
-  );
-}
+import Navbar from "./Navbar";
+import SiteFooter from "./SiteFooter";
+export default function Layout() { return <div className="journal-layout"><a href="#main-content" className="sr-only focus:not-sr-only">跳至主要內容</a><Navbar/><main id="main-content"><Outlet/></main><SiteFooter/></div>; }

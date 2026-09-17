@@ -22,40 +22,9 @@ export default function Food() {
     ? foodSections
     : foodSections.filter((item) => item.tags?.includes(activeTag));
 
-  return (
-    <section className="mx-auto max-w-6xl px-4 py-12 font-serif">
-      <h1 className="flex items-center gap-3 text-4xl font-bold leading-tight text-travel-ink">
-        <span aria-hidden="true" className="text-3xl">🍽️</span>
-        <span>中部美食總覽</span>
-      </h1>
-
-      <div className="mt-7 flex flex-wrap gap-3">
-        {availableTags.map((tag) => {
-          const isActive = activeTag === tag;
-
-          return (
-            <button
-              type="button"
-              key={tag}
-              onClick={() => setActiveTag(tag)}
-              className={`inline-flex min-h-10 items-center gap-2 whitespace-nowrap rounded-full border px-5 font-serif text-base font-semibold leading-none shadow-sm transition ${
-                isActive
-                  ? "border-[#504339] bg-[#504339] text-white shadow-md"
-                  : "border-[#d8d2c8] bg-white/80 text-[#504339] hover:border-[#b9afa4] hover:bg-white"
-              }`}
-            >
-              <span aria-hidden="true" className="text-sm leading-none">{getFoodTagIcon(tag)}</span>
-              <span>{tag}</span>
-            </button>
-          );
-        })}
-      </div>
-
-      <StorySectionGrid
-        title={activeTag === "全部" ? "全部美食" : `${activeTag}紀錄`}
-        sections={filteredSections}
-        fallbackImage="./images/placeholders/nagoya.webp"
-      />
-    </section>
-  );
+  return <section className="page-shell">
+    <header className="page-heading"><div><p className="eyebrow">01 / NAGOYA & CHUBU · FOOD NOTES</p><h1>沿途美食</h1><p>名古屋與日本中部，旅行裡吃到的每一味。</p></div><span className="page-count">{foodSections.length} 則美食紀錄</span></header>
+    <div className="filter-bar" aria-label="美食分類">{availableTags.map(tag=><button type="button" key={tag} className="filter-chip" aria-pressed={activeTag === tag} onClick={()=>setActiveTag(tag)}><span aria-hidden="true">{getFoodTagIcon(tag)}</span>{tag}</button>)}</div>
+    <div className="food-results" aria-live="polite"><StorySectionGrid title={`${activeTag} · ${filteredSections.length} 則紀錄`} sections={filteredSections} fallbackImage="./images/placeholders/nagoya.webp"/></div>
+  </section>;
 }

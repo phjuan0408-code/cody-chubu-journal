@@ -13,7 +13,7 @@ export default function StorySectionGrid({ title, sections, fallbackImage, image
   if (!sections?.length) return null;
 
   return (
-    <section className="mx-auto mt-16 max-w-6xl px-4">
+    <section className="story-grid mx-auto mt-16 max-w-6xl px-4">
       <h2 className="mb-6 font-serif text-2xl font-bold text-[#504339]">{title}</h2>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {sections.map((section) => (
@@ -53,7 +53,7 @@ function StoryCard({ section, fallbackImage, imageVariant }) {
   const showFoodMeta = section.category === "food" && primaryPlace;
 
   return (
-    <article className="flex flex-col overflow-hidden rounded-xl bg-white p-4 shadow-md">
+    <article className="story-card flex flex-col overflow-hidden rounded-xl bg-white p-4 shadow-md">
       <div className="relative overflow-hidden rounded-lg bg-[#fdf6ef]">
         {mainTag && (
           <div className="absolute right-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold leading-none text-[#504339] shadow-[0_3px_12px_rgba(80,67,57,0.14)] ring-1 ring-[#efe5da]">

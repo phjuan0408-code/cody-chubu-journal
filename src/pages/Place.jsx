@@ -21,12 +21,12 @@ export default function Place() {
       <div className="mx-auto mb-8 max-w-6xl">
         <Link to="/chubu" className="inline-flex items-center gap-2 text-sm font-semibold text-[#504339] transition hover:text-travel-green">
             <ArrowLeft size={17} />
-            Back to Chubu
+            中部旅記
         </Link>
       </div>
 
       <CityIntro
-        title={`About ${place.name}`}
+        title={place.name}
         subtitle={place.prefecture}
         imageSrc={place.cover}
         imageAlt={place.name}
@@ -37,7 +37,7 @@ export default function Place() {
         {relatedDays.map((day) => (
           <Link
             key={day.day}
-            to="/itinerary"
+            to={`/day/${day.day.toLowerCase().replace(/\s+/g, "-")}`}
             className="rounded bg-white px-3 py-1 text-sm font-semibold text-travel-slate shadow-sm transition hover:text-travel-green"
           >
             {day.day}

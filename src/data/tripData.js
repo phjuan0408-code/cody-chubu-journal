@@ -1,28 +1,3 @@
-export const oldShikokuUrl = "https://phjuan0408-code.github.io/shikoku-trip-2025/";
-
-export const featureRegions = [
-  {
-    id: "shikoku",
-    title: "四國",
-    subtitle: "回到舊網站",
-    type: "external",
-    href: oldShikokuUrl,
-    prefectures: ["香川県", "徳島県", "愛媛県", "高知県"],
-    color: "#c8553d",
-    coordinates: [133.5, 33.75],
-  },
-  {
-    id: "chubu",
-    title: "名古屋與日本中部",
-    subtitle: "開始新的遊記",
-    type: "internal",
-    href: "/chubu",
-    prefectures: ["愛知県", "岐阜県", "長野県", "富山県"],
-    color: "#2f5f8f",
-    coordinates: [137.3, 35.6],
-  },
-];
-
 export const chubuPrefectures = {
   愛知県: "#5f8fb8",
   岐阜県: "#e7bd63",

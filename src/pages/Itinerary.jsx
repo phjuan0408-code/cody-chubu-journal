@@ -1,81 +1,13 @@
-import { Link, useNavigate } from "react-router-dom";
-import { ArrowRight, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
 import { itineraryDays, places } from "../data/tripData.js";
-
-const placeById = new Map(places.map((place) => [place.id, place]));
-const daySlug = (day) => day.toLowerCase().replace(/\s+/g, "-");
-
-export default function Itinerary() {
-  const navigate = useNavigate();
-
-  return (
-    <section className="mx-auto max-w-5xl px-4 py-12">
-      <div className="font-serif">
-        <p className="text-sm font-semibold uppercase tracking-wide text-travel-green">Route</p>
-        <h1 className="mt-2 text-4xl font-bold text-travel-ink">Itinerary</h1>
-        <p className="mt-3 max-w-2xl text-lg leading-relaxed text-[#504339]">
-          依照旅行順序串起每一天，地點內容則回到各自的頁面整理。
-        </p>
-      </div>
-
-      <div className="mt-10 space-y-6">
-        {itineraryDays.map((day) => {
-          const dayPlaces = day.placeIds.map((id) => placeById.get(id)).filter(Boolean);
-          const dayPath = `/day/${daySlug(day.day)}`;
-
-          return (
-            <article
-              key={day.day}
-              role="link"
-              tabIndex={0}
-              onClick={() => navigate(dayPath)}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                  event.preventDefault();
-                  navigate(dayPath);
-                }
-              }}
-              className="cursor-pointer rounded-lg bg-white p-5 shadow-md transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-travel-green/40"
-            >
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                <div>
-                  <Link
-                    to={dayPath}
-                    className="text-sm font-bold text-travel-green transition hover:text-travel-ink"
-                  >
-                    {day.day}
-                  </Link>
-                  <Link
-                    to={dayPath}
-                    className="mt-1 block font-serif text-xl font-bold text-travel-ink transition hover:text-travel-green"
-                  >
-                    {day.title}
-                  </Link>
-                  {day.date && <p className="mt-1 text-sm text-neutral-500">{day.date}</p>}
-                </div>
-                <p className="max-w-xl text-sm leading-relaxed text-gray-600">{day.note}</p>
-              </div>
-
-              <div className="mt-5 flex flex-wrap items-center gap-3">
-                {dayPlaces.map((place, index) => (
-                  <div key={place.id} className="flex items-center gap-3">
-                    <Link
-                      to={`/place/${place.id}`}
-                      onClick={(event) => event.stopPropagation()}
-                      onKeyDown={(event) => event.stopPropagation()}
-                      className="inline-flex items-center gap-2 rounded-md bg-travel-mist px-3 py-2 text-sm font-semibold text-travel-ink transition hover:bg-white hover:shadow-sm"
-                    >
-                      <MapPin size={16} />
-                      {place.name}
-                    </Link>
-                    {index < dayPlaces.length - 1 && <ArrowRight size={16} className="text-travel-slate" />}
-                  </div>
-                ))}
-              </div>
-            </article>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
+const days = itineraryDays.map(day=>({...day,path:`/day/${day.day.toLowerCase().replace(/\s+/g,"-")}`,image:day.heroImages?.[0]?.src}));
+const placeName = id => places.find(place=>place.id===id)?.name;
+const placePath = id => `/place/${id}`;
+export default function Itinerary() { return <section className="page-shell">
+ <header className="page-heading"><div><p className="eyebrow">01 / NAGOYA & CHUBU · DAILY JOURNAL</p><h1>每日行程</h1><p>從名古屋出發，九天走過城市、宿場町與北阿爾卑斯。</p></div><span className="page-count">2026.05.08 — 05.16<br/>{days.length} 天的旅行紀錄</span></header>
+ <div className="itinerary-list">{days.map(day=><article key={day.day} className="itinerary-row">
+  <img className="itinerary-photo" src={day.image} alt={day.title} loading="lazy"/>
+  <div className="day-number"><small>DAY</small>{day.day.replace("Day ","").padStart(2,"0")}</div>
+  <div className="itinerary-copy"><time>{day.date}</time><h2><Link className="day-title-link" to={day.path}>{day.title}</Link></h2><p>{day.note}</p><div className="route-chips">{day.placeIds.map(id=><Link key={id} to={placePath(id)}>{placeName(id)}</Link>)}</div></div><ArrowUpRight className="row-arrow" size={21}/>
+ </article>)}</div></section>; }

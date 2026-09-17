@@ -16,7 +16,7 @@ export default function Day() {
   const nextDay = currentIndex >= 0 && currentIndex < itineraryDays.length - 1 ? itineraryDays[currentIndex + 1] : null;
 
   return (
-    <article className="bg-[#fdf6ef] font-serif">
+    <article className="day-detail bg-[#fdf6ef] font-serif">
       <header
         className="relative flex min-h-[420px] items-end bg-cover bg-center px-4 py-10 text-white"
         style={{ backgroundImage: `url(${day.cover})` }}
@@ -25,7 +25,7 @@ export default function Day() {
         <div className="relative z-10 mx-auto w-full max-w-5xl">
           <Link to="/itinerary" className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-white/85 transition hover:text-white">
             <ArrowLeft size={17} />
-            Back to Itinerary
+            每日行程
           </Link>
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-white/75">Trip Journal</p>
           <h1 className="mt-3 text-4xl font-bold leading-tight md:text-5xl">{day.day}</h1>
@@ -102,7 +102,7 @@ export default function Day() {
             className="inline-flex items-center gap-2 rounded border border-[#ccc] px-4 py-2 text-sm transition hover:bg-[#fdf3e6] sm:text-base"
           >
             <Home size={18} />
-            Itinerary
+            每日行程
           </Link>
         </div>
 

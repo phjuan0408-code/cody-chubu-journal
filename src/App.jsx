@@ -1,7 +1,6 @@
 import { HashRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
-import Home from "./pages/Home.jsx";
 import Chubu from "./pages/Chubu.jsx";
 import Place from "./pages/Place.jsx";
 import Food from "./pages/Food.jsx";
@@ -14,7 +13,7 @@ export default function App() {
       <ScrollToTop />
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Chubu />} />
           <Route path="/chubu" element={<Chubu />} />
           <Route path="/itinerary" element={<Itinerary />} />
           <Route path="/day/:daySlug" element={<Day />} />
